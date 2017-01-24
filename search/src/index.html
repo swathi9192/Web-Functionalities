@@ -1,0 +1,33 @@
+
+    <script src="../js/jquery-1.12.1.min.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+    <script type="text/javascript">
+        function displaycustomers(value) {
+
+    var slabel = "";
+    if (value != "") {
+        $.get("results.php?custname=" + value, function (data) {
+
+            $.each(data, function (index, customer) {
+
+                slabel += "<li>" + customer.custname + " - " +customer.custphone+"</li><br/>";
+            });
+
+            $('#custdetails').html(slabel);
+        });
+    }
+    else
+    {
+        $('#custdetails').html("");
+    }
+    }
+
+    </script>
+
+
+<h2>search for the customers</h2>
+<input type="text" onkeyup="displaycustomers(this.value)"/>
+<ul id="custdetails">
+
+</ul>
