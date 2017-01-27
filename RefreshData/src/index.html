@@ -1,0 +1,47 @@
+
+
+<div>
+
+    Click <a onclick="loadData()" style=""> here</a> to refresh the data.
+    <p></p>
+    <ul id="customerList">
+
+    </ul>
+
+</div>
+<script src="../js/jquery-1.12.1.min.js"></script>
+<script type="text/javascript">
+
+    function loadData() {
+        //console.log("called;");
+
+        $.ajax({
+            url: "results.php",
+            type: 'GET',
+            error: function () {
+                alert("ajax error, should be removed");
+            },
+            success: function (data) {
+                var label = "";
+
+
+                $.each(data, function (index, customer) {
+                    var custname=customer.custname;
+                    var custphone=customer.custphone;
+                    label += "<li>Customer Name : "+ custname+" <br/>Mobile : "+custphone+"<br/></li>";
+                });
+                $("#customerList").html(label);
+            }
+        });
+
+
+    }
+</script>
+<style type="text/css">
+
+    a{
+        text-decoration: underline;
+        color:#0000EE;
+        cursor:pointer;
+    }
+</style>
